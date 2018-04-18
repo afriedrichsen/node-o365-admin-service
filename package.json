@@ -1,7 +1,7 @@
 {
   "name": "o365-admin-service",
   "version": "0.0.1",
-  "description": "NodeJS application service for Office365 administration.",
+  "description": "NodeJS application service for Microsoft Azure/Office365 administration.",
   "main": "index.js",
   "scripts": {
     "precommit": "yarn lint",

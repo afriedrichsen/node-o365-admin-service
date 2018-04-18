@@ -1,12 +1,28 @@
-import React from 'react';
-import { render } from 'react-dom';
-import {BrowserRouter as Router } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
+import PropTypes from 'prop-types';
+import { syncHistoryWithStore } from 'react-router-redux';
+import configureStore from './store/configureStore';
+import routes from './routes';
 
-import App from './components/App';
+const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store);
 
-render((
-    <Router>
-        <App pokemon={window.__PRELOADED_STATE__}/>
-    </Router>),
-    document.getElementById('root')
-);
+class App extends Component {
+    render() {
+        return (
+            <Provider store={store}>
+                <div>
+                    <Router history={history} routes={routes} />
+                </div>
+            </Provider>
+        );
+    }
+}
+
+App.propTypes = {
+    store: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+}
+export default App;
