@@ -9,6 +9,7 @@ package-lock.json
 
 # Environment variables
 .env
+app/server/.env
 
 # Logs
 logs
