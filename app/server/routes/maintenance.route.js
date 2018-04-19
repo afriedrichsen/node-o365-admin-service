@@ -6,6 +6,9 @@ const controller = require('../controllers/maintenance.controller');
 
 const router = express.Router();
 
+router.route('/')
+    .get();
+
 router.route('/user')
     .get();
 
