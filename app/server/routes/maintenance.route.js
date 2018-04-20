@@ -17,16 +17,14 @@ router.route('/user/create')
 
 router.route('/user/:upn')
     .get(controller.getCloudUser)
-    .delete(controller.deleteCloudUser);
+    .delete(controller.deleteCloudUser)
+    .patch(controller.updateCloudUser);
 
-router.route('/user/all')
-    .get();
+//router.route('/user/all')
+//    .get();
 
-router.route('/user/update/:id')
-    .patch();
-
-router.route('/user/license/apply')
-    .post();
+//router.route('/user/license/apply')
+//    .post();
 
 router.route('/tasks')
     .get();

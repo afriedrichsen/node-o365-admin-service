@@ -32,8 +32,6 @@ exports.getUserData = (accessToken, upn) => {
      //   console.log(parsedBody);
         if (err) {
             deferred.reject(err);
-        } else if (parsedBody.error) {
-            deferred.reject(parsedBody.error.message);
         } else {
             // The value of the body will be an array of all users.
             deferred.resolve(parsedBody);
@@ -80,15 +78,50 @@ exports.createUser = (accessToken, inputName, inputFN, inputLN, inputNickname, i
         body: JSON.stringify(requestBody)
     }, function (err, response, body) {
         var parsedBody = JSON.parse(body);
-        //   console.log(parsedBody);
+         //  console.log(parsedBody);
         if (err) {
             deferred.reject(err);
-        } else if (parsedBody.error) {
-            deferred.reject(parsedBody.error.message);
         } else {
             // The value of the body will be an array of all users.
             deferred.resolve(parsedBody);
         }
+    });
+    return deferred.promise;
+
+}
+
+
+exports.updateUser = (accessToken, targetUser, updateParams) => {
+
+
+    const route = 'https://graph.microsoft.com/beta/users/' + targetUser;
+
+    const requestBody = updateParams;
+
+
+    //console.log(accessToken);
+    //console.log(JSON.stringify(requestBody));
+
+    var deferred = Q.defer();
+
+    request.patch({
+        url: route,
+        headers: {
+            'content-type': 'application/json',
+            authorization: 'Bearer ' + accessToken,
+        },
+        body: JSON.stringify(requestBody)
+    }, function (err, response) {
+
+        if(err) {
+            deferred.reject(err);
+        }
+        else {
+            const parsedBody = ""
+            deferred.resolve(JSON.stringify(parsedBody));
+
+        }
+
     });
     return deferred.promise;
 
@@ -107,11 +140,9 @@ exports.deleteUser = (accessToken, upn) => {
         }
     }, function (err, response, body) {
         var parsedBody = JSON.parse(body);
-           console.log(parsedBody);
+        //   console.log(parsedBody);
         if (err) {
             deferred.reject(err);
-        } else if (parsedBody.error) {
-            deferred.reject(parsedBody.error.message);
         } else {
             // The value of the body will be an array of all users.
             deferred.resolve(parsedBody);

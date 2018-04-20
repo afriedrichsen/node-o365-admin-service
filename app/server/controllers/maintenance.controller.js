@@ -89,6 +89,43 @@ exports.createCloudUser = async (req, res, next) => {
 }
 
 
+
+exports.updateCloudUser = async (req, res, next) => {
+    try{
+
+
+        //We get the access token and perform our work asynchronously.
+        auth.getAccessToken().then((token, notoken) => {
+            if (notoken) {
+                // Tell me why there isn't an access token...
+                console.log(notoken);
+            }
+            //...otherwise, give me the access token and let me do what I need to.
+            else {
+                const t = token;
+                //  console.log("Token is " + t)
+
+                //  console.log(upn);
+                graph.updateUser(t, req.params.upn, req.body)
+                    .then((data, nodata) => {
+                        if (nodata) {
+                            console.log(nodata)
+                        }
+                        else {
+                            console.log(data);
+                            res.json({message: 'User ' + upn + ' succesfully updated!'});
+                            //  res.send("success")
+                        }
+                    });
+
+            }
+        });
+    }
+    catch (error) {
+        next(error);
+    }
+}
+
 exports.deleteCloudUser = async (req, res, next) => {
     try {
 
@@ -111,7 +148,7 @@ exports.deleteCloudUser = async (req, res, next) => {
                         }
                         else {
                             //console.log(data);
-                            res.json(data);
+                            res.json({message: 'User ' + upn + ' succesfully deleted!'});
                             //  res.send("sucess")
                         }
                     });
