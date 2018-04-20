@@ -53,7 +53,7 @@ exports.createCloudUser = async (req, res, next) => {
         const passProfile = null;
         const nickName = null;
 
-        //We get the access token asynchronously.
+        //We get the access token and perform our work asynchronously.
         auth.getAccessToken().then((token, notoken) => {
             if (notoken) {
                 // Tell me why there isn't an access token...
@@ -63,9 +63,9 @@ exports.createCloudUser = async (req, res, next) => {
             else {
                 const t = token;
                 //  console.log("Token is " + t)
-                const upn = req.params.upn;
+
                 //  console.log(upn);
-                graph.getUserData(t, upn)
+                graph.createUser(t, displayName, anchor, passProfile, nickName, upn)
                     .then((data, nodata) => {
                         if (nodata) {
                             console.log(nodata)
