@@ -11,30 +11,38 @@ exports.status = async (res, next) => {
 
 
 exports.getCloudUser = async (req, res, next) => {
+    try {
 
-    auth.getAccessToken().then((res, err) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            const t = res;
-            //  console.log("Token is " + t)
-            const upn = req.params.upn;
-          //  console.log(upn);
-            graph.getUserData(t, upn)
-                .then((err, data) => {
-                    if (err) {
-                        console.log(err)
-                    }
-                    else {
-                        console.log(data);
-                        //  res.send("sucess")
-                    }
-                });
+        //We get the access token asynchronously.
+        auth.getAccessToken().then((token, notoken) => {
+            if (notoken) {
+                // Tell me why there isn't an access token...
+                console.log(notoken);
+            }
+            //...otherwise, give me the access token and let me do what I need to.
+            else {
+                const t = token;
+                //  console.log("Token is " + t)
+                const upn = req.params.upn;
+                //  console.log(upn);
+                graph.getUserData(t, upn)
+                    .then((data, nodata) => {
+                        if (nodata) {
+                            console.log(nodata)
+                        }
+                        else {
+                            //console.log(data);
+                            res.json(data);
+                            //  res.send("sucess")
+                        }
+                    });
 
-        }
-    });
-
+            }
+        });
+    }
+    catch (error) {
+        next(error);
+    }
 }
 
 exports.createCloudUser = async (req, res, next) => {
@@ -45,27 +53,32 @@ exports.createCloudUser = async (req, res, next) => {
         const passProfile = null;
         const nickName = null;
 
-        // We get an access token.
-        auth.getAccessToken().then((res, err) => {
-           if (err) {
-               console.log(err);
+        //We get the access token asynchronously.
+        auth.getAccessToken().then((token, notoken) => {
+            if (notoken) {
+                // Tell me why there isn't an access token...
+                console.log(notoken);
             }
+            //...otherwise, give me the access token and let me do what I need to.
             else {
-                const t = res;
-              //  console.log("Token is " + t)
-               graph.createUser2(t, displayName, anchor, nickName, passProfile, upn)
-                    .then((res, err) => {
-                    if (err) {
-                        console.log(err)
-                    }
-                    else {
-                        console.log(res);
-                      //  res.send("sucess")
-                    }
-                });
+                const t = token;
+                //  console.log("Token is " + t)
+                const upn = req.params.upn;
+                //  console.log(upn);
+                graph.getUserData(t, upn)
+                    .then((data, nodata) => {
+                        if (nodata) {
+                            console.log(nodata)
+                        }
+                        else {
+                            //console.log(data);
+                            res.json(data);
+                            //  res.send("sucess")
+                        }
+                    });
 
             }
-       });
+        });
     }
     catch (error) {
         next(error);
