@@ -13,4 +13,6 @@ module.exports = {
     clientSecret: process.env.O365_CLIENT_SECRET,
     tokenEndpoint: process.env.O365_TOKEN_URI,
     logs: process.env.NODE_ENV === 'production' ? 'combined' : 'dev',
+    apiBase: process.env.O365_API_BASE,
+    apiVersion: process.env.O365_API_VERSION,
 };

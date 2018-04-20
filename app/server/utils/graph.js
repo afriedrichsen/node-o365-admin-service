@@ -11,6 +11,7 @@
 
 const request = require('request');
 const Q = require('q');
+const config = require('../config/vars');
 /**
  * Generates a GET request the user endpoint.
  * @param {string} accessToken The access token to send with the request.
@@ -19,7 +20,9 @@ const Q = require('q');
  */
 exports.getUserData = (accessToken, upn) => {
 
-    const route = 'https://graph.microsoft.com/beta/users/' + upn;
+    //const route = 'https://graph.microsoft.com/beta/users/' + upn;
+
+    const route = config.apiBase + '/' + config.apiVersion + '/users/' + upn;
 
     var deferred = Q.defer();
 
@@ -46,22 +49,14 @@ exports.getUserData = (accessToken, upn) => {
  * @param {string} accessToken The access token to send with the request.
  * @param {Function} callback
  * */
-exports.createUser = (accessToken, inputName, inputFN, inputLN, inputNickname, inputAnchor, inputPassPolicy, inputPassProfile, inputUPN) => {
+exports.createUser = (accessToken, requestParams) => {
 
 
-    const route = 'https://graph.microsoft.com/beta/users/';
+  //  const route = 'https://graph.microsoft.com/beta/users/';
 
-    const requestBody = {
-        accountEnabled: true,
-        displayName: inputName,
-        givenName: inputFN,
-        surname: inputLN,
-        onPremisesImmutableID: inputAnchor,
-        mailNickname: inputNickname,
-        passwordPolicies: inputPassPolicy,
-        passwordProfile: inputPassProfile,
-        userPrincipalName: inputUPN
-    };
+    const route = config.apiBase + '/' + config.apiVersion + '/users/';
+
+    const requestBody = requestParams;
 
 
     //console.log(accessToken);
@@ -94,7 +89,8 @@ exports.createUser = (accessToken, inputName, inputFN, inputLN, inputNickname, i
 exports.updateUser = (accessToken, targetUser, updateParams) => {
 
 
-    const route = 'https://graph.microsoft.com/beta/users/' + targetUser;
+  //  const route = 'https://graph.microsoft.com/beta/users/' + targetUser;
+    const route = config.apiBase + '/' + config.apiVersion + '/users/' + targetUser;
 
     const requestBody = updateParams;
 
@@ -130,7 +126,9 @@ exports.updateUser = (accessToken, targetUser, updateParams) => {
 
 exports.deleteUser = (accessToken, upn) => {
 
-    const route = 'https://graph.microsoft.com/beta/users/' + upn;
+  //  const route = 'https://graph.microsoft.com/beta/users/' + upn;
+
+    const route = config.apiBase + '/' + config.apiVersion + '/users/' + upn;
 
     var deferred = Q.defer();
 
@@ -151,3 +149,122 @@ exports.deleteUser = (accessToken, upn) => {
     return deferred.promise;
 
 }
+
+exports.licenseUser = (accessToken, upn, requestParams) => {
+
+
+    //  const route = 'https://graph.microsoft.com/beta/users/';
+
+    const route = config.apiBase + '/' + config.apiVersion + '/users/' + upn + '/assignLicense';
+
+    const requestBody = requestParams;
+
+
+    //console.log(accessToken);
+    //console.log(JSON.stringify(requestBody));
+
+    var deferred = Q.defer();
+
+    request.post({
+        url: route,
+        headers: {
+            'content-type': 'application/json',
+            authorization: 'Bearer ' + accessToken,
+        },
+        body: JSON.stringify(requestBody)
+    }, function (err, response, body) {
+        var parsedBody = JSON.parse(body);
+        //  console.log(parsedBody);
+        if (err) {
+            deferred.reject(err);
+        } else {
+            // The value of the body will be an array of all users.
+            deferred.resolve(parsedBody);
+        }
+    });
+    return deferred.promise;
+
+}
+
+exports.getUserDevices = (accessToken, upn, requestParams) => {
+
+
+    //  const route = 'https://graph.microsoft.com/beta/users/';
+
+    const route = config.apiBase + '/' + config.apiVersion + '/users/' + upn + '/managedDevices';
+
+    const requestBody = requestParams;
+
+
+    //console.log(accessToken);
+    //console.log(JSON.stringify(requestBody));
+
+    var deferred = Q.defer();
+
+    request.get({
+        url: route,
+        headers: {
+            'content-type': 'application/json',
+            authorization: 'Bearer ' + accessToken,
+        },
+        body: JSON.stringify(requestBody)
+    }, function (err, response, body) {
+        var parsedBody = JSON.parse(body);
+        //  console.log(parsedBody);
+        if (err) {
+            deferred.reject(err);
+        } else {
+            // The value of the body will be an array of all users.
+            deferred.resolve(parsedBody);
+        }
+    });
+    return deferred.promise;
+
+}
+
+exports.wipeUserDevice = (accessToken, upn, devices, requestParams) => {
+
+
+    //  const route = 'https://graph.microsoft.com/beta/users/';
+
+
+
+    const requestBody = requestParams;
+    var i;
+
+
+    //console.log(accessToken);
+    //console.log(JSON.stringify(requestBody));
+
+    var deferred = Q.defer();
+
+
+    // Loop through the device array. Get the ID for each device and wipe it.
+    for (i = 0; i<devices.length; i++) {
+
+        const route = config.apiBase + '/' + config.apiVersion + '/users/' + upn + '/managedDevices/' + devices[i].id + '/wipe';
+
+
+
+        request.post({
+            url: route,
+            headers: {
+                'content-type': 'application/json',
+                authorization: 'Bearer ' + accessToken,
+            },
+            body: JSON.stringify(requestBody)
+        }, function (err, response, body) {
+            var parsedBody = JSON.parse(body);
+            //  console.log(parsedBody);
+            if (err) {
+                deferred.reject(err);
+            } else {
+                // The value of the body will be an array of all users.
+                deferred.resolve(parsedBody);
+            }
+        });
+    }
+    return deferred.promise;
+
+}
+;
