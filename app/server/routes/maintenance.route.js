@@ -81,7 +81,7 @@ router.route('/user/:upn')
      * @apiError (Unauthorized 401)  Unauthorized  Only authenticated users can access the data
      * @apiError (Forbidden 403)     Forbidden     Only authorized tenant users can access the data
      */
-    .patch(controller.updateCloudUser);
+    .patch(controller.updateCloudUser)
 /**
     * @api {delete} prod/maintenance/users/:upn Delete User
     * @apiDescription Delete an Office365 user
