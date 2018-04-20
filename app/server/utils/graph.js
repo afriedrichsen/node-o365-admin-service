@@ -48,27 +48,46 @@ exports.getUserData = (accessToken, upn) => {
  * @param {string} accessToken The access token to send with the request.
  * @param {Function} callback
  * */
-exports.createUser = (accessToken, inputName, inputAnchor, inputNickname, inputPassProfile, inputUPN) => {
+exports.createUser = (accessToken, inputName, inputFN, inputLN, inputNickname, inputAnchor, inputPassPolicy, inputPassProfile, inputUPN) => {
 
 
-    const route = 'https://graph.microsoft.com/beta/users/' + upn;
+    const route = 'https://graph.microsoft.com/beta/users/';
+
+    const requestBody = {
+        accountEnabled: true,
+        displayName: inputName,
+        givenName: inputFN,
+        surname: inputLN,
+        onPremisesImmutableID: inputAnchor,
+        mailNickname: inputNickname,
+        passwordPolicies: inputPassPolicy,
+        passwordProfile: inputPassProfile,
+        userPrincipalName: inputUPN
+    };
+
+
+    //console.log(accessToken);
+    //console.log(JSON.stringify(requestBody));
 
     var deferred = Q.defer();
 
-    request.get(route, {
-        auth: {
-            bearer: accessToken
-        }
+    request.post({
+            url: route,
+            headers: {
+            'content-type': 'application/json',
+            authorization: 'Bearer ' + accessToken,
+        },
+        body: JSON.stringify(requestBody)
     }, function (err, response, body) {
         var parsedBody = JSON.parse(body);
-         //  console.log(parsedBody);
+        //   console.log(parsedBody);
         if (err) {
             deferred.reject(err);
         } else if (parsedBody.error) {
             deferred.reject(parsedBody.error.message);
         } else {
             // The value of the body will be an array of all users.
-            deferred.resolve(parsedBody.value);
+            deferred.resolve(parsedBody);
         }
     });
     return deferred.promise;
@@ -76,47 +95,28 @@ exports.createUser = (accessToken, inputName, inputAnchor, inputNickname, inputP
 }
 
 
-exports.createUser2 = (accessToken, inputName, inputAnchor, inputNickname, inputPassProfile, inputUPN) => {
- //   console.log(accessToken);
-  /*  request
-        .post('https://graph.microsoft.com/beta/users')
-        .send({accountEnabled: true,
-            displayName: inputName,
-            onPremiseImmutableId: inputAnchor,
-            mailNickname: inputNickname,
-            passwordProfile: inputPassProfile,
-            userPrincipalName: inputUPN })
-        .set('Authorization', 'Bearer ' + accessToken)
-        .set('Content-Type', 'application/json')
-        .then((err, res) => {
-          //  callback(err, res);
-            if(err){
-                console.log(err);
-            }
-            else{
-                console.log(res);
-            }
-        });*/
-  /*
-    const config = {headers: {'Authorization': "Bearer " + accessToken} }
-    console.log(config)
-    console.log("Creating user..." +inputName)
+exports.deleteUser = (accessToken, upn) => {
 
-    request.post('https://graph.microsoft.com/beta/users', {
-        accountEnabled: true,
-        displayName: inputName,
-        onPremiseImmutableId: inputAnchor,
-        mailNickname: inputNickname,
-        passwordProfile: inputPassProfile,
-        userPrincipalName: inputUPN
-    }, config).then((err, res) => {
-        if (err) {
-            console.log(err);
+    const route = 'https://graph.microsoft.com/beta/users/' + upn;
+
+    var deferred = Q.defer();
+
+    request.delete(route, {
+        auth: {
+            bearer: accessToken
         }
-        else {
-            console.log(res);
+    }, function (err, response, body) {
+        var parsedBody = JSON.parse(body);
+           console.log(parsedBody);
+        if (err) {
+            deferred.reject(err);
+        } else if (parsedBody.error) {
+            deferred.reject(parsedBody.error.message);
+        } else {
+            // The value of the body will be an array of all users.
+            deferred.resolve(parsedBody);
         }
     });
-    */
+    return deferred.promise;
 
 }

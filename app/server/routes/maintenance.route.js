@@ -16,7 +16,8 @@ router.route('/user/create')
     .post(controller.createCloudUser);
 
 router.route('/user/:upn')
-    .get(controller.getCloudUser);
+    .get(controller.getCloudUser)
+    .delete(controller.deleteCloudUser);
 
 router.route('/user/all')
     .get();
