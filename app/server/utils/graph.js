@@ -39,7 +39,7 @@ exports.getUserData = (accessToken, upn) => {
             deferred.reject(parsedBody.error.message);
         } else {
             // The value of the body will be an array of all users.
-            deferred.resolve(parsedBody);
+            deferred.resolve(parsedBody.value);
         }
     });
     return deferred.promise;

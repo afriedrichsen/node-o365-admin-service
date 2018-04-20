@@ -34,7 +34,7 @@ auth.getAccessToken = function () {
             deferred.reject(parsedBody.error_description);
         } else {
             // If successful, return the access token.
-           // console.log(parsedBody.);
+           // console.log(parsedBody.value);
             deferred.resolve(parsedBody.access_token);
         }
     });
