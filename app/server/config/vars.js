@@ -11,6 +11,6 @@ module.exports = {
     tenant: process.env.O365_TENANT,
     clientId: process.env.O365_CLIENT_ID,
     clientSecret: process.env.O365_CLIENT_SECRET,
-    tokenEndpoint: process.env.O365_REDIRECT_URI,
+    tokenEndpoint: process.env.O365_TOKEN_URI,
     logs: process.env.NODE_ENV === 'production' ? 'combined' : 'dev',
 };

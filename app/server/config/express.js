@@ -46,14 +46,10 @@ app.use(cors());
 //passport.use('facebook', strategies.facebook);
 //passport.use('google', strategies.google);
 
-//Status page
-app.use('/token', (req, res) => {
-   res.send("Web service is up.")
-});
 
 // mount api v1 routes
 app.use('/prod', routes);
-//app.use('/token', )
+
 // if error is not an instanceOf APIError, convert it.
 app.use(error.converter);
 

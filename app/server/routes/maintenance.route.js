@@ -7,16 +7,16 @@ const controller = require('../controllers/maintenance.controller');
 const router = express.Router();
 
 router.route('/')
-    .get();
+    .get((req, res) => res.send('Maintenance endpoint is available.'));
 
 router.route('/user')
-    .get();
+    .get((req, res) => res.send('User functionality is here.'));
 
 router.route('/user/create')
     .post(controller.createCloudUser);
 
-router.route('/user/:id')
-    .get();
+router.route('/user/:upn')
+    .get(controller.getCloudUser);
 
 router.route('/user/all')
     .get();
