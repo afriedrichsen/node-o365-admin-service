@@ -1,0 +1,18 @@
+version: "3.2"
+services:
+  resume-app:
+    image: afriedrichsen/o365-service:latest
+    deploy:
+      replicas: 4
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "100M"
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "3000:3000"
+    networks:
+      - friednet
+networks:
+  friednet:
