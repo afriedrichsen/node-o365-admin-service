@@ -6,7 +6,8 @@
   "scripts": {
     "precommit": "yarn lint",
     "prestart": "yarn docs",
-    "start": "cross-env NODE_ENV=production pm2 start ./app/server/index.js",
+    "start": "node ./app/server/index.js",
+    "start2": "cross-env NODE_ENV=production pm2 start ./app/server/index.js",
     "dev": "nodemon ./app/server/index.js",
     "lint": "eslint **/*.js --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:fix": "yarn lint -- --fix",
@@ -37,6 +38,7 @@
   "author": "Alexander Friedrichsen",
   "license": "MIT",
   "dependencies": {
+    "apidoc": "^0.17.5",
     "bcryptjs": "2.4.3",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.0",
@@ -66,6 +68,7 @@
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
     "react-router-bootstrap": "^0.24.4",
+    "opn-cli": "^3.1.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "reactstrap": "^5.0.0",
@@ -75,7 +78,6 @@
     "uuid": "^3.1.0"
   },
   "devDependencies": {
-    "apidoc": "^0.17.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
@@ -91,7 +93,6 @@
     "mocha": "^3.3.0",
     "nodemon": "^1.11.0",
     "nyc": "^11.0.3",
-    "opn-cli": "^3.1.0",
     "sinon": "^4.0.1",
     "sinon-chai": "^3.0.0",
     "supertest": "^3.0.0",

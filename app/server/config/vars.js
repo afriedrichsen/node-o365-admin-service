@@ -1,10 +1,15 @@
 const path = require('path');
 
 // import .env variables
-require('dotenv-safe').load({
-    path: path.join(__dirname, '../.env'),
-    sample: path.join(__dirname, '../.env.example'),
-});
+// We only want this to run if we are NOT running in Docker.
+// If this runs in Docker the variables are obtained through secrets and .env and .env.example are NOT contained in the image.
+if (process.env.NODE_ENV != 'production_docker'){
+    require('dotenv-safe').load({
+        path: path.join(__dirname, '../.env'),
+        sample: path.join(__dirname, '../.env.example'),
+    });
+}
+
 module.exports = {
     env: process.env.NODE_ENV,
     port: process.env.PORT,
