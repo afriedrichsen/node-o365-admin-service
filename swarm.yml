@@ -17,7 +17,7 @@ services:
     secrets:
       - O365_CLIENT_ID
       - O365_CLIENT_SECRET
-      - O365_CLIENT_TOKEN_URI
+      - O365_TOKEN_URI
       - O365_API_BASE
       - O365_API_VERSION
 networks:
@@ -27,7 +27,7 @@ secrets:
     external: true
   O365_CLIENT_SECRET:
     external: true
-  O365_CLIENT_TOKEN_URI:
+  O365_TOKEN_URI:
     external: true
   O365_API_BASE:
     external: true

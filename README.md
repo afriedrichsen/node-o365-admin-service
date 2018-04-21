@@ -77,9 +77,10 @@ docker-compose up
 
 OR 
 
-docker stack deploy -c docker-compose-swarm.yml <your service name>
+docker stack deploy -c swarm.yml <your service name>
 
 ``` 
+NOTE: Running in SWARM mode must be done after first setting the following 
 
 #### 
 ## Authors
