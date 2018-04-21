@@ -1,6 +1,6 @@
 {
   "name": "o365-admin-service",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "NodeJS application service for Microsoft Azure/Office365 administration.",
   "main": "index.js",
   "scripts": {
