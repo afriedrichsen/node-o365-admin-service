@@ -40,9 +40,11 @@ Per the official documentation from Microsoft, this application requires registr
 2.) Clone the repository.
 
 3.) Copy .env.example to project root and edit:
-* Change ``O365_CLIENT_APP_ID`` to the Application ID value obtained from the new app registration in 1.)
-* Change ``O365_CLIENT_APP_SECRET`` to the Application Secret value obtained from app registration in 1.)
+* Change ``O365_CLIENT_ID`` to the Application ID value obtained from the new app registration in 1.)
+* Change ``O365_CLIENT_SECRET`` to the Application Secret value obtained from app registration in 1.)
 * Change ``O365_TOKEN_URI`` to the Oauth2.0 token URI found in the Azure Management Portal under Azure Active Directory -> App Registrations -> View Endpoints
+* Change ``O365_API_BASE`` to ``https://graph.microsoft.com``
+* Change ``O365_API_VERSION`` to the Graph API version you want to use (either ``v1.0`` or ``beta``)
 ``` 
 cd node-365-admin-service
 cp .env.example .env
@@ -80,7 +82,13 @@ OR
 docker stack deploy -c swarm.yml <your service name>
 
 ``` 
-NOTE: Running in SWARM mode must be done after first setting the following 
+NOTE: Running in "swarm mode" must be done after first setting the following as Docker secrets:
+
+* ``O365_CLIENT_ID``
+* ``O365_CLIENT_SECRET``
+* ``O365_TOKEN_URI``
+* ``O365_API_BASE``
+* ``O365_API_VERSION``
 
 #### 
 ## Authors
