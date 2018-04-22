@@ -82,13 +82,15 @@ OR
 docker stack deploy -c swarm.yml <your service name>
 
 ``` 
-NOTE: Running in "swarm mode" must be done after first setting the following as Docker secrets:
+NOTE: When running with Docker the following need to be set as environment variables on the Docker host:
 
 * ``O365_CLIENT_ID``
 * ``O365_CLIENT_SECRET``
 * ``O365_TOKEN_URI``
 * ``O365_API_BASE``
 * ``O365_API_VERSION``
+
+When running in "swarm" mode the above should be set as secrets instead.
 
 #### 
 ## Authors
