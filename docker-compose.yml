@@ -1,0 +1,24 @@
+version: "3.2"
+services:
+  o365-admin-service:
+    image: afriedrichsen/o365-admin-service:swarm
+    deploy:
+      replicas: 4
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "100M"
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "3000:3000"
+    networks:
+      - friednet
+    environment:
+      - O365_CLIENT_ID=${O365_CLIENT_ID}
+      - O365_CLIENT_SECRET=${O365_CLIENT_SECRET}
+      - O365_TOKEN_URI=${O365_TOKEN_URI}
+      - O365_API_BASE=${O365_API_BASE}
+      - O365_API_VERSION=${O365_API_VERSION}
+networks:
+  friednet:
