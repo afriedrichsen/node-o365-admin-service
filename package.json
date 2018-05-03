@@ -29,11 +29,15 @@
     "docker:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "docker:test": "docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/afriedrichsen/node-o365-admin-service.git"
+  },
   "keywords": [
     "Node",
     "Microsoft Graph API",
-    "React",
-    "Redux"
+    "Express",
+    "Passport.js"
   ],
   "author": "Alexander Friedrichsen",
   "license": "MIT",
@@ -42,7 +46,6 @@
     "bcryptjs": "2.4.3",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.0",
-    "bootstrap": "^4.0.0-beta",
     "compression": "^1.6.2",
     "cors": "^2.8.3",
     "cross-env": "^5.0.1",
@@ -64,25 +67,10 @@
     "passport-jwt": "4.0.0",
     "pm2": "^2.4.6",
     "q": "^1.5.1",
-    "react": "^16.3.2",
-    "react-bootstrap": "^0.32.1",
-    "react-dom": "^16.3.2",
-    "react-redux": "^5.0.7",
-    "react-router-bootstrap": "^0.24.4",
-    "react-router-dom": "^4.2.2",
-    "react-router-redux": "^4.0.8",
-    "reactstrap": "^5.0.0",
-    "redux": "^4.0.0",
-    "redux-thunk": "^2.2.0",
     "simple-oauth2": "^1.5.2",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
     "chai": "^4.1.0",
     "chai-as-promised": "^7.1.1",
     "coveralls": "^3.0.0",
@@ -95,7 +83,6 @@
     "nyc": "^11.0.3",
     "sinon": "^4.0.1",
     "sinon-chai": "^3.0.0",
-    "supertest": "^3.0.0",
-    "webpack": "^4.6.0"
+    "supertest": "^3.0.0"
   }
 }

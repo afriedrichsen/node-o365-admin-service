@@ -1,7 +1,6 @@
 build
 coverage
 app/server/vault
-app/client/vault
 
 
 # Use yarn.lock instead
