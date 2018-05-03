@@ -1,4 +1,7 @@
 # Microsoft Graph Administration REST API
+[![Build Status](https://travis-ci.org/afriedrichsen/node-o365-admin-service.svg?branch=master)](https://travis-ci.org/afriedrichsen/node-o365-admin-service)
+
+
 Written in NodeJS.
 
 ## Features

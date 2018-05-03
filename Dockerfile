@@ -2,7 +2,8 @@ FROM node:alpine
 
 MAINTAINER Alex Friedrichsen <afriedrichsen@me.com>
 
-ENV NODE_ENV=production_docker
+ENV NODE_ENV=production
+ENV DOCKER_FLAG=docker
 ENV PORT=3000
 
 # Update
