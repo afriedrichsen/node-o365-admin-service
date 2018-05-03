@@ -15,5 +15,6 @@
   },
   "extends": [
     "airbnb-base"
+    "last", "prettier/react", "plugin:react/recommended"
   ]
 }
