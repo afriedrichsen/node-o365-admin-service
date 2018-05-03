@@ -1,6 +1,6 @@
 {
   "name": "o365-admin-service",
-  "version": "0.1.4",
+  "version": "1.0.1",
   "description": "NodeJS application service for Microsoft Azure/Office365 administration.",
   "main": "index.js",
   "scripts": {
@@ -58,6 +58,7 @@
     "moment-timezone": "^0.5.13",
     "mongoose": "^4.9.7",
     "morgan": "^1.8.1",
+    "opn-cli": "^3.1.0",
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
     "passport-jwt": "4.0.0",
@@ -68,7 +69,6 @@
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
     "react-router-bootstrap": "^0.24.4",
-    "opn-cli": "^3.1.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "reactstrap": "^5.0.0",
