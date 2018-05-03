@@ -12,7 +12,7 @@
     "lint": "eslint **/*.js --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:fix": "yarn lint -- --fix",
     "lint:watch": "yarn lint -- --watch",
-    "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --timeout 20000 --recursive app/server/api/tests",
+    "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --timeout 20000 --recursive app/server/tests",
     "test:unit": "cross-env NODE_ENV=test mocha app/server/tests/unit",
     "test:integration": "cross-env NODE_ENV=test mocha --timeout 20000 app/server/tests/integration",
     "test:watch": "cross-env NODE_ENV=test mocha --watch app/server/tests/unit",
